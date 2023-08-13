@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const jsonData = jsonInput.value;
   
       try {
-        const response = await fetch('http://localhost:3000/submit', {
+        const response = await fetch('https://json-form-app.onrender.com/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
