@@ -35,7 +35,6 @@ app.post('/submit', async (req, res) => {
     }
 });
 
-//not used just a test api
 app.get('/latest', async (req, res) => {
     try {
         // Fetch the latest JSON data from MongoDB

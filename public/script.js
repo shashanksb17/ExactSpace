@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const jsonResponseElement = document.getElementById('jsonResponse');
     const formResponseElement = document.getElementById('formResponse');
   
+    const showLoader = (element) => {
+      element.innerHTML = '<div class="spinner"></div>';
+    };
+  
+    const hideLoader = (element, content) => {
+      element.innerHTML = content;
+    };
+  
     submitBtn.addEventListener('click', async () => {
       const jsonData = jsonInput.value;
   
@@ -18,13 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
   
         const jsonResponse = await response.json();
         jsonResponseElement.textContent = JSON.stringify(jsonResponse, null, 2);
+        formResponseElement.innerHTML = ''; // Clear previous form response
   
-        // Clear previous form response
-        formResponseElement.innerHTML = '';
+        showLoader(formResponseElement);
   
-        // Generate form elements based on JSON data
-        for (const key in jsonResponse) {
-          if (jsonResponse.hasOwnProperty(key)) {
+        const formResponse = await fetch('https://json-form-app.onrender.com/latest');
+        const formData = await formResponse.json();
+  
+        hideLoader(formResponseElement, ''); // Clear loader
+  
+        for (const key in formData) {
+          if (formData.hasOwnProperty(key)) {
             const formRow = document.createElement('div');
             formRow.classList.add('form-row');
   
@@ -35,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const input = document.createElement('input');
             input.classList.add('form-input');
             input.type = 'text';
-            input.value = jsonResponse[key];
+            input.value = formData[key];
   
             formRow.appendChild(label);
             formRow.appendChild(input);
