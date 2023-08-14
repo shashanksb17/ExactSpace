@@ -11,7 +11,6 @@ const app=express()
 
 app.use(cors())
 app.use(express.json())
-// app.use(bodyParser.json());
 
 
 // ROUTES
@@ -26,7 +25,6 @@ app.post('/submit', async (req, res) => {
         const parsedData = JSON.parse(jsonData);
         console.log(parsedData);
         
-        // Save the JSON data to MongoDB
         await JsonData.create({ data: jsonData });
 
         res.json(parsedData);
@@ -37,7 +35,6 @@ app.post('/submit', async (req, res) => {
 
 app.get('/latest', async (req, res) => {
     try {
-        // Fetch the latest JSON data from MongoDB
         const latestData = await JsonData.findOne().sort({ timestamp: -1 });
 
         if (latestData) {

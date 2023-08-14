@@ -1,0 +1,22 @@
+I am using windows OS
+
+The steps are as follows:
+
+Bash
+1 >> find all the ".log" files which you have access to in ascending order
+find ~ -type f -name "*.log" -exec du -h {} + | sort -rh
+
+2 >> To navigate to the directory  
+cd /c/Users/shashank/AppData/Local/VALORANT/Saved/Logs/
+
+3>> To find the largest log file in the directory
+ls -lhS /c/Users/shashank/AppData/Local/VALORANT/Saved/Logs/*.log | head -n 1
+
+4>> To open the log file
+less /c/Users/shashank/AppData/Local/VALORANT/Saved/Logs/ShooterGame-backup-2023.08.12-11.57.31.log
+
+5>> To truncate it to 100 lines
+head -n 100 ShooterGame-backup-2023.08.12-11.57.31.log
+tail -n 100 ShooterGame-backup-2023.08.12-11.57.31.log
+
+ 
